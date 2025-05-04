@@ -4,6 +4,7 @@ import { rooms } from "@/data/RoomData";
 import Image from "next/image";
 import Link from "next/link";
 import { use } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RoomPage({
   params,
@@ -11,7 +12,12 @@ export default function RoomPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const router = useRouter();
   const room = rooms.find((r) => r.id === parseInt(id));
+
+  const handleReservation = () => {
+    router.push("/#reservation");
+  };
 
   if (!room) {
     return (
@@ -49,12 +55,12 @@ export default function RoomPage({
             <h1 className="text-3xl font-bold mb-4">{room.title}</h1>
             <p className="text-xl mb-8">{room.desc}</p>
             {room.isAvailable ? (
-              <Link
-                href={room.link}
+              <button
+                onClick={handleReservation}
                 className="inline-block px-6 py-3 bg-red-800 hover:bg-red-900 text-white rounded-lg transition-colors"
               >
                 Rezervovat
-              </Link>
+              </button>
             ) : (
               <button
                 disabled
