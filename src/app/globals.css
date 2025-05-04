@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900");
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -22,5 +25,67 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Nunito", sans-serif;
+}
+
+.font-heading {
+  font-family: "Varela Round", sans-serif;
+}
+/* -------------------------------------------------------------
+   Booqito widget – společné nastavení
+-------------------------------------------------------------- */
+#reservation,
+#reservation .container,
+#reservation .px-4,
+#reservation .px-6,
+#reservation .px-12 {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.sccz-widget,
+.sccz-widget iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* -------------------------------------------------------------
+   Mobily (< 768 px)
+-------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  #reservation {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #reservation .container,
+  #reservation .max-w-lg {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .sccz-widget,
+  .sccz-widget iframe {
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+}
+
+/* -------------------------------------------------------------
+   Tablety (768–1199 px)
+-------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .sccz-widget,
+  .sccz-widget iframe {
+    min-height: calc(100dvh - 60px) !important;
+  }
 }
