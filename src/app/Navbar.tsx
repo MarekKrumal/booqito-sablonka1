@@ -80,29 +80,27 @@ export default function Header() {
           }
         >
           <ul className="space-y-8 text-center">
-            {["O nás", "Místnosti", "Rezervovat", "Kontakt"].map(
-              (label, idx) => (
-                <li
-                  key={label}
-                  onClick={handleNav}
-                  className="text-2xl text-white hover:text-gray-400 transition-colors font-extralight"
+            {["O nás", "Místnosti", "Rezervovat", "Kontakt"].map((label) => (
+              <li
+                key={label}
+                onClick={handleNav}
+                className="text-2xl text-white hover:text-gray-400 transition-colors font-extralight"
+              >
+                <Link
+                  href={
+                    label === "Rezervovat"
+                      ? "#reservation"
+                      : label === "O nás"
+                      ? "#about"
+                      : label === "Místnosti"
+                      ? "#rooms"
+                      : "#contact"
+                  }
                 >
-                  <Link
-                    href={
-                      label === "Rezervovat"
-                        ? "#reservation"
-                        : label === "O nás"
-                        ? "#about"
-                        : label === "Místnosti"
-                        ? "#rooms"
-                        : "#contact"
-                    }
-                  >
-                    {label}
-                  </Link>
-                </li>
-              )
-            )}
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

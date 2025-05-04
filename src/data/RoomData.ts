@@ -13,7 +13,7 @@ export const rooms: Room[] = [
     id: 1,
     title: "Tajemství kouzelné knihovny",
     desc: "Pro 2-6 osob, obtížnost: jednoduchá. Objevte tajemství staré knihovny plné kouzelných knih.",
-    price: 1000,
+    price: 1200,
     img: "/images/room1.jpg",
     link: "#reservation",
     isAvailable: true,
