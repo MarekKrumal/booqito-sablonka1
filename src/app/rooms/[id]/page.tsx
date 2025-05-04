@@ -16,7 +16,7 @@ export default function RoomPage({
   const room = rooms.find((r) => r.id === parseInt(id));
 
   const handleReservation = () => {
-    router.push("/#reservation");
+    window.location.href = "/#reservation";
   };
 
   if (!room) {
@@ -35,12 +35,12 @@ export default function RoomPage({
   return (
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-6 md:px-12">
-        <Link
-          href="/"
-          className="text-blue-500 hover:underline mb-8 inline-block"
+        <div
+          onClick={() => (window.location.href = "/")}
+          className="text-blue-500 hover:underline mb-8 inline-block cursor-pointer"
         >
           ← Zpět na hlavní stránku
-        </Link>
+        </div>
 
         <div className="bg-black/65 shadow-lg rounded-lg overflow-hidden">
           <div className="relative h-[400px] md:h-[600px]">

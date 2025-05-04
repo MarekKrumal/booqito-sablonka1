@@ -2,15 +2,26 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const [bgColor, setBgColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   const handleNav = () => {
     setNavOpen((o) => !o);
+  };
+
+  const handleNavigation = (path: string) => {
+    // If we're on a dynamic route (like /rooms/[id]) and navigating to homepage
+    if (pathname.startsWith("/rooms/") && path === "/") {
+      window.location.href = "/";
+    } else {
+      window.location.href = path;
+    }
   };
 
   useEffect(() => {
@@ -37,20 +48,20 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-8 md:px-16 py-4 flex justify-between items-center h-16">
-        <Link href="/">
+        <div onClick={() => handleNavigation("/")}>
           <h1
             style={{ color: textColor }}
             className="text-xl font-extralight cursor-pointer font-heading"
           >
             Escape Games Olomouc
           </h1>
-        </Link>
+        </div>
         {/* Desktop menu */}
         <ul style={{ color: textColor }} className="hidden md:flex space-x-6">
           {["about", "rooms", "reservation", "contact"].map((section) => (
             <li key={section} className="capitalize">
-              <Link href={`#${section}`}>
-                <span className="hover:text-gray-400 transition-colors font-extralight">
+              <div onClick={() => handleNavigation(`/#${section}`)}>
+                <span className="hover:text-gray-400 transition-colors font-extralight cursor-pointer">
                   {section === "reservation"
                     ? "Rezervovat"
                     : section === "about"
@@ -59,7 +70,7 @@ export default function Header() {
                     ? "Místnosti"
                     : "Kontakt"}
                 </span>
-              </Link>
+              </div>
             </li>
           ))}
         </ul>
@@ -83,22 +94,21 @@ export default function Header() {
             {["O nás", "Místnosti", "Rezervovat", "Kontakt"].map((label) => (
               <li
                 key={label}
-                onClick={handleNav}
-                className="text-2xl text-white hover:text-gray-400 transition-colors font-extralight"
-              >
-                <Link
-                  href={
+                onClick={() => {
+                  handleNav();
+                  handleNavigation(
                     label === "Rezervovat"
-                      ? "#reservation"
+                      ? "/#reservation"
                       : label === "O nás"
-                      ? "#about"
+                      ? "/#about"
                       : label === "Místnosti"
-                      ? "#rooms"
-                      : "#contact"
-                  }
-                >
-                  {label}
-                </Link>
+                      ? "/#rooms"
+                      : "/#contact"
+                  );
+                }}
+                className="text-2xl text-white hover:text-gray-400 transition-colors font-extralight cursor-pointer"
+              >
+                {label}
               </li>
             ))}
           </ul>

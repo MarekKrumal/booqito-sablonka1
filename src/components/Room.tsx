@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { Room } from "@/data/RoomData";
 
 interface RoomProps {
@@ -8,6 +9,16 @@ interface RoomProps {
 }
 
 export default function Room({ room, isActive = false }: RoomProps) {
+  const pathname = usePathname();
+
+  const handleReservation = () => {
+    if (pathname.startsWith("/rooms/")) {
+      window.location.href = "/#reservation";
+    } else {
+      window.location.href = room.link;
+    }
+  };
+
   return (
     <div
       className={`block bg-black/65 shadow-lg rounded-lg overflow-hidden transition-all duration-300 h-[500px] ${
@@ -29,16 +40,21 @@ export default function Room({ room, isActive = false }: RoomProps) {
         </div>
       </Link>
       <div className="px-6 pb-6 mt-auto">
-        <Link
-          href={room.link}
-          className={`block w-full text-center px-4 py-2 rounded transition-colors ${
-            room.isAvailable
-              ? "bg-red-800 hover:bg-red-900 text-white"
-              : "bg-gray-600 text-gray-300 cursor-not-allowed"
-          }`}
-        >
-          {room.isAvailable ? "Rezervovat" : "Již brzy!"}
-        </Link>
+        {room.isAvailable ? (
+          <button
+            onClick={handleReservation}
+            className="block w-full text-center px-4 py-2 bg-red-800 hover:bg-red-900 text-white rounded transition-colors"
+          >
+            Rezervovat
+          </button>
+        ) : (
+          <button
+            disabled
+            className="block w-full text-center px-4 py-2 bg-gray-600 text-gray-300 rounded cursor-not-allowed"
+          >
+            Již brzy!
+          </button>
+        )}
       </div>
     </div>
   );
