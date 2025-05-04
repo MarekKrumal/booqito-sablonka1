@@ -9,8 +9,9 @@ interface RoomProps {
 
 export default function Room({ room, isActive = false }: RoomProps) {
   return (
-    <div
-      className={`bg-black/65 shadow-lg rounded-lg overflow-hidden transition-all duration-300 h-[500px] ${
+    <Link
+      href={`/rooms/${room.id}`}
+      className={`block bg-black/65 shadow-lg rounded-lg overflow-hidden transition-all duration-300 h-[500px] ${
         isActive ? "scale-100" : "scale-90 opacity-70"
       }`}
     >
@@ -22,8 +23,7 @@ export default function Room({ room, isActive = false }: RoomProps) {
           <h4 className="font-bold text-xl mb-2">{room.title}</h4>
           <p className="text-gray-300 mb-4">{room.desc}</p>
         </div>
-        <Link
-          href={room.link}
+        <div
           className={`px-4 py-2 rounded transition-colors ${
             room.isAvailable
               ? "bg-red-800 hover:bg-red-900 text-white"
@@ -31,8 +31,8 @@ export default function Room({ room, isActive = false }: RoomProps) {
           }`}
         >
           {room.isAvailable ? "Rezervovat" : "Již brzy!"}
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
