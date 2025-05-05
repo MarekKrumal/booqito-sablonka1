@@ -4,7 +4,6 @@ import { rooms } from "@/data/RoomData";
 import Image from "next/image";
 import Link from "next/link";
 import { use } from "react";
-import { useRouter } from "next/navigation";
 
 export default function RoomPage({
   params,
@@ -12,7 +11,6 @@ export default function RoomPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const router = useRouter();
   const room = rooms.find((r) => r.id === parseInt(id));
 
   const handleReservation = () => {
@@ -36,7 +34,7 @@ export default function RoomPage({
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-6 md:px-12">
         <div
-          onClick={() => (window.location.href = "/")}
+          onClick={() => (window.location.href = "/#rooms")}
           className="text-blue-500 hover:underline mb-8 inline-block cursor-pointer"
         >
           ← Zpět na hlavní stránku
